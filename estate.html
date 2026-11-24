@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" data-theme="midnight-emerald">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PropPulse | Smart Indian Property Discovery</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* THREE COMPLETE HIGH-CONTRAST CSS THEME DEFINITIONS */
+        :root, [data-theme="midnight-emerald"] {
+            --bg-main: #0b1116;
+            --bg-card: #131d26;
+            --bg-card-hover: #1b2836;
+            --bg-nav: rgba(11, 17, 22, 0.90);
+            --bg-input: #182430;
+            --bg-secondary: #182430;
+            --border-color: rgba(255, 255, 255, 0.10);
+            --border-hover: rgba(16, 185, 129, 0.50);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-sub: #64748b;
+            --accent-primary: #10b981;
+            --accent-primary-hover: #059669;
+            --accent-secondary: #6366f1;
+            --accent-highlight: #f59e0b;
+            --badge-bg: rgba(16, 185, 129, 0.15);
+            --badge-text: #34d399;
+            --hero-bg: radial-gradient(circle at 50% 0%, #152232 0%, #0b1116 75%);
+            --modal-bg: #131d26;
+            --chart-principal: #10b981;
+            --chart-interest: #f59e0b;
+        }
+
+        [data-theme="royal-sandstone"] {
+            --bg-main: #faf7f2;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f5efe6;
+            --bg-nav: rgba(250, 247, 242, 0.92);
+            --bg-input: #f3ede2;
+            --bg-secondary: #f3ede2;
+            --border-color: rgba(194, 65, 12, 0.15);
+            --border-hover: rgba(194, 65, 12, 0.50);
+            --text-main: #1c1917;
+            --text-muted: #57534e;
+            --text-sub: #78716c;
+            --accent-primary: #c2410c;
+            --accent-primary-hover: #9a3412;
+            --accent-secondary: #d97706;
+            --accent-highlight: #b45309;
+            --badge-bg: rgba(194, 65, 12, 0.10);
+            --badge-text: #c2410c;
+            --hero-bg: linear-gradient(135deg, #f5efe6 0%, #faf7f2 100%);
+            --modal-bg: #ffffff;
+            --chart-principal: #c2410c;
+            --chart-interest: #d97706;
+        }
+
+        [data-theme="sapphire-modern"] {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --bg-nav: rgba(255, 255, 255, 0.92);
+            --bg-input: #edf2f7;
+            --bg-secondary: #edf2f7;
+            --border-color: rgba(37, 99, 235, 0.15);
+            --border-hover: rgba(37, 99, 235, 0.50);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-sub: #64748b;
+            --accent-primary: #2563eb;
+            --accent-primary-hover: #1d4ed8;
+            --accent-secondary: #06b6d4;
+            --accent-highlight: #0284c7;
+            --badge-bg: rgba(37, 99, 235, 0.10);
+            --badge-text: #2563eb;
+            --hero-bg: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+            --modal-bg: #ffffff;
+            --chart-principal: #2563eb;
+            --chart-interest: #06b6d4;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+
+        .theme-card {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        .theme-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .theme-nav {
+            background-color: var(--bg-nav);
+            border-color: var(--border-color);
+        }
+
+        .theme-input {
+            background-color: var(--bg-input);
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        /* Explicit Option Colors for Cross-Browser Dropdowns */
+        select option {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+        }
+
+        .theme-secondary-bg {
+            background-color: var(--bg-secondary);
+        }
+
+        .theme-hero-bg {
+            background: var(--hero-bg);
+        }
+
+        .text-theme-muted {
+            color: var(--text-muted);
+        }
+
+        .text-theme-sub {
+            color: var(--text-sub);
+        }
+
+        .text-theme-main {
+            color: var(--text-main);
+        }
+
+        .text-theme-accent {
+            color: var(--accent-primary);
+        }
+
+        .bg-theme-accent {
+            background-color: var(--accent-primary);
+        }
+
+        .bg-theme-accent:hover {
+            background-color: var(--accent-primary-hover);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(150, 150, 150, 0.3); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(150, 150, 150, 0.5); }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.2s ease-out forwards; }
+
+        .donut-chart {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .donut-hole {
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- STICKY HEADER & NAVIGATION -->
+    <header class="sticky top-0 z-40 theme-nav backdrop-blur-md border-b shadow-xs transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            <!-- Brand Logo with Inline SVG -->
+            <a href="#" onclick="resetAllFilters(); return false;" class="flex items-center gap-3 group focus:outline-none">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-200 relative overflow-hidden">
+                    <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/>
+                        <path d="M7 12h2l1.5-3 2 6 1.5-3H16" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-2xl font-black tracking-tight text-theme-main group-hover:text-emerald-500 transition-colors">PropPulse</span>
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    </div>
+                    <span class="text-[10px] uppercase tracking-widest font-extrabold text-theme-accent block -mt-1">Smart Indian Property Discovery</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-1 text-sm font-bold">
+                <button onclick="setFilterType('All')" id="nav-all" class="px-4 py-2 rounded-xl transition-all text-theme-accent theme-secondary-bg">All Properties</button>
+                <button onclick="setFilterType('Sale')" id="nav-sale" class="px-4 py-2 rounded-xl text-theme-muted hover:text-theme-accent transition-all">Buy (₹ Cr / Lakhs)</button>
+                <button onclick="setFilterType('Rent')" id="nav-rent" class="px-4 py-2 rounded-xl text-theme-muted hover:text-theme-accent transition-all">Rent (₹ / mo)</button>
+                <button onclick="openEMICalculatorModal()" class="px-4 py-2 rounded-xl text-theme-muted hover:text-theme-accent transition-all flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-theme-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m-6 4h6m-6 4h6M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span>EMI Calc</span>
+                </button>
+            </nav>
+
+            <!-- Actions, Theme Switcher & Shortlist -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Theme Switcher Dropdown -->
+                <div class="relative inline-block text-left">
+                    <select id="theme-selector" onchange="changeTheme(this.value)" class="theme-input text-xs font-extrabold px-3 py-2 rounded-xl border focus:outline-none cursor-pointer shadow-xs">
+                        <option value="midnight-emerald">🌙 Midnight Emerald</option>
+                        <option value="royal-sandstone">🏜️ Royal Sandstone</option>
+                        <option value="sapphire-modern">💎 Sapphire Modern</option>
+                    </select>
+                </div>
+
+                <!-- Shortlist Drawer Button -->
+                <button onclick="toggleShortlistDrawer(true)" id="nav-saved" class="px-3.5 py-2 rounded-xl theme-card border text-sm font-bold shadow-xs hover:shadow-md transition-all flex items-center gap-2">
+                    <svg class="w-4 h-4 text-rose-500 fill-rose-500" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span class="hidden sm:inline text-theme-main">Shortlist</span>
+                    <span id="saved-counter-badge" class="px-2 py-0.5 text-xs bg-emerald-600 text-white rounded-full font-black">0</span>
+                </button>
+
+                <!-- Advisor Contact -->
+                <button onclick="openGeneralContactModal()" class="hidden lg:inline-flex items-center gap-2 bg-theme-accent text-white text-sm font-bold px-4 py-2 rounded-xl shadow-md transition-all active:scale-95">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <span>Advisor</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SEARCH BAR SECTION -->
+    <section class="relative theme-hero-bg py-10 lg:py-14 overflow-hidden border-b theme-card">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl text-center mx-auto mb-8">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-500 text-xs font-extrabold tracking-wide uppercase mb-3">
+                    <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                    100% RERA Verified Properties Across India
+                </span>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-3 leading-tight text-theme-main">
+                    Smart Indian Property Discovery
+                </h1>
+                <p class="text-theme-muted text-sm sm:text-base max-w-2xl mx-auto font-medium">
+                    Explore premium residences & rentals in <strong class="text-theme-accent">Vijayawada, Hyderabad, Bengaluru, Mumbai & Pune</strong> with transparent <span class="font-bold">Indian Rupee (₹)</span> pricing.
+                </p>
+            </div>
+
+            <!-- SEARCH FILTER CARD -->
+            <div class="theme-card rounded-3xl p-5 sm:p-7 shadow-2xl border">
+                <!-- Segmented Type Selector -->
+                <div class="flex items-center justify-between border-b theme-card pb-4 mb-5 gap-4 flex-wrap">
+                    <div class="inline-flex theme-secondary-bg p-1.5 rounded-2xl gap-1">
+                        <button onclick="setFilterType('All')" id="type-btn-All" class="filter-type-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all bg-theme-accent text-white shadow-xs">All Listing Types</button>
+                        <button onclick="setFilterType('Sale')" id="type-btn-Sale" class="filter-type-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-theme-muted hover:text-theme-accent">Buy (₹ Cr / Lakhs)</button>
+                        <button onclick="setFilterType('Rent')" id="type-btn-Rent" class="filter-type-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-theme-muted hover:text-theme-accent">Rent (₹ / mo)</button>
+                    </div>
+
+                    <div class="flex items-center gap-2 text-xs font-bold text-theme-muted">
+                        <span id="active-count-label" class="theme-secondary-bg px-3.5 py-1.5 rounded-full border theme-card text-theme-accent">Showing properties</span>
+                    </div>
+                </div>
+
+                <!-- Input Controls Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
+                    <!-- Search Input -->
+                    <div class="lg:col-span-2">
+                        <label class="block text-[11px] font-extrabold text-theme-sub uppercase tracking-wider mb-1">Locality / Keyword</label>
+                        <div class="relative">
+                            <svg class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-theme-sub" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                            <input type="text" id="search-input" oninput="applyFilters()" placeholder="Benz Circle, Jubilee Hills, Whitefield..." class="w-full pl-10 pr-3 py-2.5 theme-input rounded-xl text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                        </div>
+                    </div>
+
+                    <!-- City Select Dropdown -->
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-theme-sub uppercase tracking-wider mb-1">City</label>
+                        <select id="city-select" onchange="applyFilters()" class="w-full px-3 py-2.5 theme-input rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-semibold">
+                            <option value="All">All Cities</option>
+                            <option value="Vijayawada">Vijayawada</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Bengaluru">Bengaluru</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Pune">Pune</option>
+                        </select>
+                    </div>
+
+                    <!-- Property Category Dropdown -->
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-theme-sub uppercase tracking-wider mb-1">Category</label>
+                        <select id="category-select" onchange="applyFilters()" class="w-full px-3 py-2.5 theme-input rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-semibold">
+                            <option value="All">All Types</option>
+                            <option value="Apartment">Apartment</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Penthouse">Penthouse</option>
+                            <option value="Independent House">Independent House</option>
+                        </select>
+                    </div>
+
+                    <!-- Budget Dropdown -->
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-theme-sub uppercase tracking-wider mb-1">Budget (₹)</label>
+                        <select id="budget-select" onchange="applyFilters()" class="w-full px-3 py-2.5 theme-input rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-semibold">
+                            <option value="All">All Budgets</option>
+                            <option value="under-1cr">Buy: Under ₹1 Cr</option>
+                            <option value="1cr-2.5cr">Buy: ₹1 Cr – ₹2.5 Cr</option>
+                            <option value="above-2.5cr">Buy: Above ₹2.5 Cr</option>
+                            <option value="rent-under-50k">Rent: Under ₹50,000/mo</option>
+                            <option value="rent-above-50k">Rent: Above ₹50,000/mo</option>
+                        </select>
+                    </div>
+
+                    <!-- Sort Dropdown -->
+                    <div>
+                        <label class="block text-[11px] font-extrabold text-theme-sub uppercase tracking-wider mb-1">Sort By</label>
+                        <select id="sort-select" onchange="applyFilters()" class="w-full px-3 py-2.5 theme-input rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-semibold">
+                            <option value="featured">Featured First</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                            <option value="area-desc">Largest Area (Sq Ft)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Active Filter Tags & Reset -->
+                <div id="filter-reset-wrapper" class="hidden mt-4 pt-4 border-t theme-card flex items-center justify-between text-xs text-theme-muted">
+                    <span id="active-filter-tags" class="flex flex-wrap items-center gap-2"></span>
+                    <button onclick="resetAllFilters()" class="text-rose-500 hover:underline font-extrabold flex items-center gap-1.5 ml-auto">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                        <span>Reset Filters</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN PROPERTIES CONTENT AREA -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+        <!-- Property Cards Grid -->
+        <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Rendered dynamically -->
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="empty-state" class="hidden py-16 text-center max-w-md mx-auto">
+            <div class="w-20 h-20 theme-secondary-bg rounded-full flex items-center justify-center mx-auto mb-4 text-theme-muted">
+                <svg class="w-10 h-10 text-theme-sub" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0V8m0 3h4m-4 0H9m4 0v8m-4-8V8m0 3H9m0-3h4M9 8h4"/></svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2 text-theme-main">No Matching Properties</h3>
+            <p class="text-theme-muted text-sm mb-6">No listing matched your filter criteria on PropPulse.</p>
+            <button onclick="resetAllFilters()" class="inline-flex items-center gap-2 bg-theme-accent text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-md transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                <span>Reset All Filters</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="theme-secondary-bg text-theme-muted text-sm border-t theme-card mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-indigo-600 flex items-center justify-center text-white font-bold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    </div>
+                    <span class="text-xl font-black text-theme-main">PropPulse</span>
+                </div>
+                <p class="text-xs leading-relaxed text-theme-sub">
+                    PropPulse is India's premier real estate discovery portal providing transparent Rupee pricing, RERA compliance verification, and direct agent contact across top metro hubs.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-theme-main mb-3">Popular Cities</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><button onclick="setCityFilter('Vijayawada')" class="hover:text-theme-accent transition-colors">Vijayawada (Benz Circle, Moghalrajpuram)</button></li>
+                    <li><button onclick="setCityFilter('Hyderabad')" class="hover:text-theme-accent transition-colors">Hyderabad (Jubilee Hills, Gachibowli)</button></li>
+                    <li><button onclick="setCityFilter('Bengaluru')" class="hover:text-theme-accent transition-colors">Bengaluru (Whitefield, Indiranagar)</button></li>
+                    <li><button onclick="setCityFilter('Mumbai')" class="hover:text-theme-accent transition-colors">Mumbai (Bandra West)</button></li>
+                    <li><button onclick="setCityFilter('Pune')" class="hover:text-theme-accent transition-colors">Pune (Koregaon Park)</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-theme-main mb-3">PropPulse Hubs</h4>
+                <p class="text-xs leading-relaxed text-theme-sub">
+                    Benz Circle, Vijayawada<br>
+                    Jubilee Hills, Hyderabad<br>
+                    Indiranagar, Bengaluru<br>
+                    Bandra West, Mumbai<br>
+                    <span class="text-theme-accent font-semibold block mt-1">Contact: hello@proppulse.in</span>
+                </p>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-theme-main mb-3">WhatsApp Listing Alerts</h4>
+                <p class="text-xs text-theme-sub mb-3">Get real-time price drops & pre-launch alerts directly on WhatsApp.</p>
+                <div class="flex gap-2">
+                    <input type="text" id="newsletter-mobile" placeholder="+91 Mobile number" class="theme-input text-xs px-3 py-2 rounded-xl focus:outline-none focus:ring-1 focus:ring-emerald-500 w-full">
+                    <button onclick="subscribeNewsletter()" class="bg-theme-accent text-white text-xs px-3.5 py-2 rounded-xl font-bold transition-all">Join</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t theme-card flex flex-col sm:flex-row items-center justify-between text-xs text-theme-sub">
+            <p>© 2026 PropPulse India Pvt. Ltd. All rights reserved.</p>
+            <div class="flex gap-4 mt-2 sm:mt-0">
+                <a href="#" onclick="showToast('RERA Compliance verified for all listings', 'info'); return false;" class="hover:text-theme-accent">RERA Compliance</a>
+                <a href="#" onclick="showToast('Privacy Policy: No data is shared with third parties', 'info'); return false;" class="hover:text-theme-accent">Privacy Policy</a>
+                <a href="#" onclick="showToast('Terms: Verified property discovery portal', 'info'); return false;" class="hover:text-theme-accent">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SLIDE-OVER SHORTLIST DRAWER -->
+    <div id="shortlist-drawer" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-xs transition-opacity">
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md theme-card shadow-2xl flex flex-col border-l">
+                <!-- Drawer Header -->
+                <div class="p-5 theme-secondary-bg flex items-center justify-between border-b theme-card">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-5 h-5 text-rose-500 fill-rose-500" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <h3 class="text-base font-extrabold text-theme-main">Shortlisted Properties</h3>
+                        <span id="drawer-counter" class="bg-emerald-600 text-white text-xs px-2.5 py-0.5 rounded-full font-bold">0</span>
+                    </div>
+                    <button onclick="toggleShortlistDrawer(false)" class="text-theme-muted hover:text-theme-main p-1">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+
+                <!-- Drawer Content -->
+                <div id="drawer-items-container" class="flex-grow overflow-y-auto p-4 space-y-4 custom-scrollbar">
+                    <!-- Dynamic items rendered -->
+                </div>
+
+                <!-- Drawer Footer -->
+                <div class="p-4 border-t theme-card theme-secondary-bg flex items-center justify-between">
+                    <button onclick="clearShortlist()" class="text-xs font-bold text-rose-500 hover:underline">Clear All</button>
+                    <button onclick="toggleShortlistDrawer(false)" class="bg-theme-accent text-white text-xs font-bold px-4 py-2 rounded-xl">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROPERTY DETAIL MODAL -->
+    <div id="detail-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="theme-card rounded-3xl shadow-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto custom-scrollbar relative animate-fade-in border">
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-20 w-10 h-10 bg-black/70 hover:bg-black text-white rounded-full flex items-center justify-center transition-all backdrop-blur-md">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div id="detail-modal-body">
+                <!-- Dynamically generated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- STANDALONE EMI CALCULATOR MODAL -->
+    <div id="emi-modal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+        <div class="theme-card rounded-3xl shadow-2xl max-w-2xl w-full p-6 sm:p-8 relative border animate-fade-in my-8">
+            <button onclick="closeEMICalculatorModal()" class="absolute top-4 right-4 text-theme-muted hover:text-theme-main p-1">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-theme-accent text-white flex items-center justify-center font-black text-xl shadow-md">₹</div>
+                <div>
+                    <h3 class="text-xl font-black text-theme-main">Home Loan EMI Calculator</h3>
+                    <p class="text-xs text-theme-muted">Instant estimates for SBI, HDFC, ICICI & Axis Bank Home Loans</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <div class="md:col-span-7 space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-theme-muted mb-1">
+                            <span>Loan Amount (₹)</span>
+                            <span id="standalone-principal-val" class="text-theme-accent font-extrabold">₹80,00,000</span>
+                        </div>
+                        <input type="range" id="standalone-principal" min="1000000" max="100000000" step="500000" value="8000000" oninput="updateStandaloneEMI()" class="w-full accent-emerald-500 cursor-pointer">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-theme-muted mb-1">Interest Rate (% p.a.)</label>
+                            <input type="number" step="0.1" min="5" max="20" id="standalone-rate" value="8.5" oninput="updateStandaloneEMI()" class="w-full theme-input rounded-xl px-3 py-2 text-sm font-bold focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-theme-muted mb-1">Tenure (Years)</label>
+                            <select id="standalone-tenure" onchange="updateStandaloneEMI()" class="w-full theme-input rounded-xl px-3 py-2 text-sm font-bold focus:outline-none focus:ring-1 focus:ring-emerald-500">
+                                <option value="10">10 Years</option>
+                                <option value="15">15 Years</option>
+                                <option value="20" selected>20 Years</option>
+                                <option value="25">25 Years</option>
+                                <option value="30">30 Years</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="theme-secondary-bg p-4 rounded-2xl border theme-card space-y-2 mt-4">
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-xs text-theme-muted uppercase font-bold">Monthly EMI</span>
+                            <span id="standalone-emi-output" class="text-2xl sm:text-3xl font-black text-theme-accent">₹0</span>
+                        </div>
+                        <div class="border-t theme-card pt-2 flex flex-col gap-1 text-xs text-theme-muted">
+                            <div class="flex justify-between">
+                                <span>Principal Amount:</span>
+                                <strong id="standalone-loan-output" class="text-theme-main">₹0</strong>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Total Interest:</span>
+                                <strong id="standalone-interest-output" class="text-theme-main">₹0</strong>
+                            </div>
+                            <div class="flex justify-between border-t theme-card pt-1 font-bold text-theme-main">
+                                <span>Total Payable:</span>
+                                <strong id="standalone-payable-output" class="text-theme-accent">₹0</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Donut Chart Breakdown -->
+                <div class="md:col-span-5 flex flex-col items-center justify-center p-4 theme-secondary-bg rounded-2xl border theme-card">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-theme-sub mb-3">Payment Breakdown</span>
+                    <div id="chart-donut" class="donut-chart mb-4 shadow-md">
+                        <div class="donut-hole">
+                            <span id="chart-principal-pct" class="text-sm font-black text-theme-main">60%</span>
+                            <span class="text-[9px] uppercase font-bold text-theme-sub">Principal</span>
+                        </div>
+                    </div>
+                    <div class="w-full space-y-2 text-xs font-bold">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                                <span class="text-theme-muted">Principal</span>
+                            </div>
+                            <span id="chart-principal-pct-val" class="text-theme-main">--%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                                <span class="text-theme-muted">Interest</span>
+                            </div>
+                            <span id="chart-interest-pct-val" class="text-theme-main">--%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK CONTACT / SITE VISIT MODAL -->
+    <div id="contact-modal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="theme-card rounded-3xl shadow-2xl max-w-md w-full p-6 sm:p-7 relative animate-fade-in border">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-theme-muted hover:text-theme-main p-1">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-11 h-11 rounded-2xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center font-bold text-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-extrabold text-theme-main">Schedule Site Visit</h3>
+                    <p id="contact-modal-subtitle" class="text-xs text-theme-muted">PropPulse Verified Listing</p>
+                </div>
+            </div>
+
+            <form onsubmit="handleQuickContactSubmit(event)" class="space-y-4">
+                <input type="hidden" id="quick-contact-property-id">
+                <div>
+                    <label class="block text-xs font-extrabold text-theme-muted mb-1">Full Name *</label>
+                    <input type="text" id="contact-name" required placeholder="e.g. Anish Sharma" class="w-full px-3.5 py-2.5 theme-input rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-extrabold text-theme-muted mb-1">Mobile (+91) *</label>
+                        <input type="tel" id="contact-phone" required placeholder="+91 98765 43210" class="w-full px-3.5 py-2.5 theme-input rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-extrabold text-theme-muted mb-1">Preferred Date</label>
+                        <input type="date" id="contact-date" class="w-full px-3.5 py-2.5 theme-input rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-extrabold text-theme-muted mb-1">Message / Inquiry</label>
+                    <textarea rows="3" required id="quick-contact-message" class="w-full px-3.5 py-2.5 theme-input rounded-xl text-sm focus:ring-2 focus:ring-emerald-500 focus:outline-none" placeholder="I would like to schedule a site visit..."></textarea>
+                </div>
+                <div class="flex gap-2">
+                    <button type="submit" class="flex-grow bg-theme-accent text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                        <span>Request Visit</span>
+                    </button>
+                    <button type="button" onclick="openWhatsAppDirect()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 rounded-xl text-sm transition-all flex items-center justify-center gap-1.5" title="WhatsApp Instant Chat">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // CRITICAL REQUIREMENT 1: SAFE LOCALSTORAGE WRAPPER WITH IN-MEMORY FALLBACK
+        const memoryStorage = {};
+        const safeStorage = {
+            getItem: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch (e) {
+                    return memoryStorage[key] || null;
+                }
+            },
+            setItem: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (e) {
+                    memoryStorage[key] = String(value);
+                }
+            }
+        };
+
+        // CRITICAL REQUIREMENT 3: VERIFIED SVG ARCHITECTURAL FALLBACK DATA URI
+        const SVG_IMAGE_FALLBACK = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'><rect width='800' height='600' fill='%23131d26'/><path d='M300 350 L400 250 L500 350' stroke='%2338bdf8' stroke-width='8' fill='none'/><path d='M250 400 L400 220 L550 400' stroke='%2310b981' stroke-width='10' fill='none'/><rect x='360' y='320' width='80' height='120' fill='%23f59e0b' opacity='0.8'/><text x='400' y='490' font-family='sans-serif' font-size='24' fill='%2394a3b8' text-anchor='middle' font-weight='bold'>PropPulse Verified Property</text></svg>";
+
+        // PROPPULSE REAL ESTATE DATABASE (Indian Rupee Pricing ₹ Lakhs/Crores & ₹/mo)
+        const PROPERTIES = [
+            {
+                id: 1,
+                title: "The Grand Skylight Luxury Residence",
+                location: "Benz Circle, Vijayawada, Andhra Pradesh",
+                city: "Vijayawada",
+                locality: "Benz Circle",
+                priceNumeric: 11500000,
+                priceFormatted: "₹1.15 Cr",
+                pricePerSqft: "₹5,750 / sq.ft.",
+                type: "Sale",
+                category: "Apartment",
+                bhk: "3 BHK",
+                beds: 3,
+                baths: 3,
+                sqft: 2000,
+                facing: "East Facing",
+                possession: "Ready to Move",
+                reraId: "P0327001099",
+                yearBuilt: 2024,
+                parking: "2 Covered Car Parks",
+                featured: true,
+                images: [
+                    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["Vastu Compliant", "Swimming Pool", "Clubhouse & Gym", "24/7 Security", "100% Power Backup", "EV Charging"],
+                description: "Ultra-luxury 3 BHK apartment situated at prime Benz Circle, Vijayawada. Built according to 100% Vastu principles with premium teakwood doors, imported Italian marble flooring, and dual wide balconies.",
+                agent: {
+                    name: "Srinivas Rao",
+                    role: "Andhra Regional Lead",
+                    phone: "+91 98480 12345",
+                    whatsapp: "919848012345",
+                    email: "srinivas@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+                }
+            },
+            {
+                id: 2,
+                title: "Royal Palms Gated Estate Villa",
+                location: "Jubilee Hills, Road No. 36, Hyderabad, Telangana",
+                city: "Hyderabad",
+                locality: "Jubilee Hills",
+                priceNumeric: 65000000,
+                priceFormatted: "₹6.50 Cr",
+                pricePerSqft: "₹10,833 / sq.ft.",
+                type: "Sale",
+                category: "Villa",
+                bhk: "5 BHK",
+                beds: 5,
+                baths: 6,
+                sqft: 6000,
+                facing: "North-East Facing",
+                possession: "Ready to Move",
+                reraId: "P0240000342",
+                yearBuilt: 2023,
+                parking: "4 SUV Garage",
+                featured: true,
+                images: [
+                    "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["Private Heated Pool", "Home Automation", "Private Elevator", "Vastu Compliant", "Terrace Garden", "Solar Power Grid"],
+                description: "Palatial 5 BHK triplex Independent Villa in prime Jubilee Hills. Features private internal elevator, landscaped terrace garden, heated infinity pool, and dual EV fast chargers.",
+                agent: {
+                    name: "Ananya Reddy",
+                    role: "Hyderabad Luxury Director",
+                    phone: "+91 99890 87654",
+                    whatsapp: "919989087654",
+                    email: "ananya.reddy@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+                }
+            },
+            {
+                id: 3,
+                title: "Indiranagar Sky Garden Penthouse",
+                location: "100 Feet Road, Indiranagar, Bengaluru, Karnataka",
+                city: "Bengaluru",
+                locality: "Indiranagar",
+                priceNumeric: 38000000,
+                priceFormatted: "₹3.80 Cr",
+                pricePerSqft: "₹10,857 / sq.ft.",
+                type: "Sale",
+                category: "Penthouse",
+                bhk: "4 BHK",
+                beds: 4,
+                baths: 4,
+                sqft: 3500,
+                facing: "East Facing",
+                possession: "Ready to Move",
+                reraId: "PRM/KA/RERA/1251/502",
+                yearBuilt: 2024,
+                parking: "3 Basement Parking",
+                featured: true,
+                images: [
+                    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["Wraparound Balcony", "Rooftop Lounge", "Smart Lock Security", "Squash Court", "EV Charging", "Pet Park"],
+                description: "Signature duplex penthouse on 100 Feet Road, Indiranagar. Boasts a 1,200 sq.ft. private wraparound terrace deck, double-height living ceiling, and automated climate control.",
+                agent: {
+                    name: "Vikram Malhotra",
+                    role: "Bengaluru Regional Head",
+                    phone: "+91 98860 11223",
+                    whatsapp: "919886011223",
+                    email: "vikram@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+                }
+            },
+            {
+                id: 4,
+                title: "Sea Crest Oceanfront Luxury Suite",
+                location: "Carter Road, Bandra West, Mumbai, Maharashtra",
+                city: "Mumbai",
+                locality: "Bandra West",
+                priceNumeric: 52500000,
+                priceFormatted: "₹5.25 Cr",
+                pricePerSqft: "₹29,166 / sq.ft.",
+                type: "Sale",
+                category: "Apartment",
+                bhk: "3 BHK",
+                beds: 3,
+                baths: 3,
+                sqft: 1800,
+                facing: "West Sea Facing",
+                possession: "Ready to Move",
+                reraId: "P5180002891",
+                yearBuilt: 2023,
+                parking: "2 Podium Parking",
+                featured: false,
+                images: [
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["Arabian Sea View", "Private Sky Lounge", "Valet Parking", "Concierge Desk", "Infinity Pool"],
+                description: "Unobstructed Arabian Sea view apartment on Carter Road, Bandra West. Equipped with German modular kitchen appliances, floor-to-ceiling acoustic glass, and concierge service.",
+                agent: {
+                    name: "Karan Mehta",
+                    role: "Mumbai Vice President",
+                    phone: "+91 98200 55443",
+                    whatsapp: "919820055443",
+                    email: "karan@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+                }
+            },
+            {
+                id: 5,
+                title: "Greenfield Eco High-Rise Residence",
+                location: "Financial District, Gachibowli, Hyderabad, Telangana",
+                city: "Hyderabad",
+                locality: "Gachibowli",
+                priceNumeric: 65000,
+                priceFormatted: "₹65,000 / mo",
+                pricePerSqft: "Rental Listing",
+                type: "Rent",
+                category: "Apartment",
+                bhk: "3 BHK",
+                beds: 3,
+                baths: 3,
+                sqft: 2200,
+                facing: "East Facing",
+                possession: "Immediate",
+                reraId: "P0240000912",
+                yearBuilt: 2023,
+                parking: "2 Covered Parking",
+                featured: false,
+                images: [
+                    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["Fully Furnished", "High Speed Fiber", "Olympic Pool", "Supermarket Inside", "Badminton Court"],
+                description: "Fully furnished high-rise apartment in Gachibowli Financial District. Includes contemporary interior woodwork, central air conditioning, leather seating, and OLED Smart TV.",
+                agent: {
+                    name: "Ananya Reddy",
+                    role: "Hyderabad Director",
+                    phone: "+91 99890 87654",
+                    whatsapp: "919989087654",
+                    email: "ananya.reddy@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+                }
+            },
+            {
+                id: 6,
+                title: "Koregaon Park Heritage Bungalow",
+                location: "Lane 7, Koregaon Park, Pune, Maharashtra",
+                city: "Pune",
+                locality: "Koregaon Park",
+                priceNumeric: 41000000,
+                priceFormatted: "₹4.10 Cr",
+                pricePerSqft: "₹9,761 / sq.ft.",
+                type: "Sale",
+                category: "Independent House",
+                bhk: "4 BHK",
+                beds: 4,
+                baths: 5,
+                sqft: 4200,
+                facing: "North Facing",
+                possession: "Ready to Move",
+                reraId: "P5210001402",
+                yearBuilt: 2022,
+                parking: "3 Car Driveway",
+                featured: false,
+                images: [
+                    "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["Private Lawn", "Gazebo Seating", "Vastu Compliant", "Solar Water Heater", "Staff Quarters"],
+                description: "Spacious independent bungalow in tree-lined Lane 7, Koregaon Park. Offers private manicured lawn, teakwood framed windows, high ceilings, and independent borewell sump.",
+                agent: {
+                    name: "Siddharth Joshi",
+                    role: "Pune Regional Lead",
+                    phone: "+91 97640 33221",
+                    whatsapp: "919764033221",
+                    email: "siddharth@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80"
+                }
+            },
+            {
+                id: 7,
+                title: "Tech Corridor Smart Residence",
+                location: "ITPL Main Road, Whitefield, Bengaluru, Karnataka",
+                city: "Bengaluru",
+                locality: "Whitefield",
+                priceNumeric: 8800000,
+                priceFormatted: "₹88 Lakhs",
+                pricePerSqft: "₹7,040 / sq.ft.",
+                type: "Sale",
+                category: "Apartment",
+                bhk: "2 BHK",
+                beds: 2,
+                baths: 2,
+                sqft: 1250,
+                facing: "East Facing",
+                possession: "Ready to Move",
+                reraId: "PRM/KA/RERA/1251/889",
+                yearBuilt: 2024,
+                parking: "1 Covered Car Park",
+                featured: false,
+                images: [
+                    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["Near Namma Metro", "Vastu Compliant", "Co-Working Lounge", "EV Charging Hub", "Yoga Studio"],
+                description: "Modern tech-enabled 2 BHK apartment right next to Whitefield Metro station. Features smart touch switches, biometric door lock, and reticulated gas connection.",
+                agent: {
+                    name: "Vikram Malhotra",
+                    role: "Bengaluru Regional Head",
+                    phone: "+91 98860 11223",
+                    whatsapp: "919886011223",
+                    email: "vikram@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+                }
+            },
+            {
+                id: 8,
+                title: "Moghalrajpuram Serene Abode",
+                location: "Moghalrajpuram, Vijayawada, Andhra Pradesh",
+                city: "Vijayawada",
+                locality: "Moghalrajpuram",
+                priceNumeric: 14500000,
+                priceFormatted: "₹1.45 Cr",
+                pricePerSqft: "₹5,800 / sq.ft.",
+                type: "Sale",
+                category: "Independent House",
+                bhk: "3 BHK",
+                beds: 3,
+                baths: 3,
+                sqft: 2500,
+                facing: "North-East Facing",
+                possession: "Ready to Move",
+                reraId: "P0327001442",
+                yearBuilt: 2023,
+                parking: "2 Car Parking",
+                featured: true,
+                images: [
+                    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["100% Vastu", "Independent Borewell", "Private Terrace", "Solar Roof", "Granite Flooring"],
+                description: "Independent duplex house located in peaceful Moghalrajpuram, Vijayawada. Built strictly per traditional Vastu with private open terrace and high-capacity water overhead tank.",
+                agent: {
+                    name: "Srinivas Rao",
+                    role: "Andhra Regional Lead",
+                    phone: "+91 98480 12345",
+                    whatsapp: "919848012345",
+                    email: "srinivas@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+                }
+            },
+            {
+                id: 9,
+                title: "Bandra Seafront Luxury Apartment",
+                location: "Pali Hill, Bandra West, Mumbai, Maharashtra",
+                city: "Mumbai",
+                locality: "Bandra West",
+                priceNumeric: 120000,
+                priceFormatted: "₹1.20 Lakh / mo",
+                pricePerSqft: "Rental Listing",
+                type: "Rent",
+                category: "Apartment",
+                bhk: "2 BHK",
+                beds: 2,
+                baths: 2,
+                sqft: 1100,
+                facing: "West Facing",
+                possession: "Immediate",
+                reraId: "P5180009941",
+                yearBuilt: 2024,
+                parking: "1 Reserved Car Park",
+                featured: true,
+                images: [
+                    "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+                ],
+                facilities: ["Fully Furnished", "Sea Breeze Balcony", "Gym & Sauna", "24/7 Security", "Pet Friendly"],
+                description: "Elegantly furnished 2 BHK apartment in elite Pali Hill, Bandra West. Features designer fittings, plush hardwood aesthetics, and sunset sea views.",
+                agent: {
+                    name: "Karan Mehta",
+                    role: "Mumbai Vice President",
+                    phone: "+91 98200 55443",
+                    whatsapp: "919820055443",
+                    email: "karan@proppulse.in",
+                    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+                }
+            }
+        ];
+
+        // GLOBAL APP STATE
+        let currentFilters = {
+            type: 'All',
+            city: 'All',
+            category: 'All',
+            budget: 'All',
+            search: '',
+            sort: 'featured'
+        };
+
+        // Load Shortlist using safeStorage
+        let savedIds = [];
+        try {
+            const stored = safeStorage.getItem('proppulse_favorites_inr');
+            if (stored) savedIds = JSON.parse(stored);
+        } catch (e) {
+            savedIds = [];
+        }
+
+        // THEME SWITCHER LOGIC
+        function changeTheme(themeName) {
+            document.documentElement.setAttribute('data-theme', themeName);
+            safeStorage.setItem('proppulse_theme', themeName);
+            const selector = document.getElementById('theme-selector');
+            if (selector) selector.value = themeName;
+            updateDonutChart();
+            showToast(`Theme updated to ${themeName.replace('-', ' ')}`, 'info');
+        }
+
+        // INITIALIZATION
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = safeStorage.getItem('proppulse_theme') || 'midnight-emerald';
+            changeTheme(savedTheme);
+
+            updateSavedBadges();
+            applyFilters();
+            updateStandaloneEMI();
+        });
+
+        // FILTER FUNCTIONS
+        function setFilterType(type) {
+            currentFilters.type = type;
+
+            ['All', 'Sale', 'Rent'].forEach(t => {
+                const btn = document.getElementById(`type-btn-${t}`);
+                if (btn) {
+                    if (t === type) {
+                        btn.className = 'filter-type-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all bg-theme-accent text-white shadow-xs';
+                    } else {
+                        btn.className = 'filter-type-btn px-5 py-2 rounded-xl text-xs sm:text-sm font-extrabold transition-all text-theme-muted hover:text-theme-accent';
+                    }
+                }
+            });
+
+            ['all', 'sale', 'rent'].forEach(n => {
+                const nav = document.getElementById(`nav-${n}`);
+                if (nav) {
+                    if (n === type.toLowerCase()) {
+                        nav.classList.add('text-theme-accent', 'theme-secondary-bg');
+                        nav.classList.remove('text-theme-muted');
+                    } else {
+                        nav.classList.remove('text-theme-accent', 'theme-secondary-bg');
+                        nav.classList.add('text-theme-muted');
+                    }
+                }
+            });
+
+            applyFilters();
+        }
+
+        function setCityFilter(cityName) {
+            document.getElementById('city-select').value = cityName;
+            applyFilters();
+            window.scrollTo({ top: 320, behavior: 'smooth' });
+        }
+
+        function resetAllFilters() {
+            currentFilters = {
+                type: 'All',
+                city: 'All',
+                category: 'All',
+                budget: 'All',
+                search: '',
+                sort: 'featured'
+            };
+
+            document.getElementById('search-input').value = '';
+            document.getElementById('city-select').value = 'All';
+            document.getElementById('category-select').value = 'All';
+            document.getElementById('budget-select').value = 'All';
+            document.getElementById('sort-select').value = 'featured';
+
+            setFilterType('All');
+            showToast('Filters reset to default', 'info');
+        }
+
+        function applyFilters() {
+            const searchVal = document.getElementById('search-input').value.toLowerCase().trim();
+            const cityVal = document.getElementById('city-select').value;
+            const categoryVal = document.getElementById('category-select').value;
+            const budgetVal = document.getElementById('budget-select').value;
+            const sortVal = document.getElementById('sort-select').value;
+
+            currentFilters.search = searchVal;
+            currentFilters.city = cityVal;
+            currentFilters.category = categoryVal;
+            currentFilters.budget = budgetVal;
+            currentFilters.sort = sortVal;
+
+            let filtered = PROPERTIES.filter(p => {
+                if (currentFilters.type !== 'All' && p.type !== currentFilters.type) return false;
+                if (currentFilters.city !== 'All' && p.city !== currentFilters.city) return false;
+                if (currentFilters.category !== 'All' && p.category !== currentFilters.category) return false;
+
+                if (budgetVal === 'under-1cr') {
+                    if (p.type !== 'Sale' || p.priceNumeric >= 10000000) return false;
+                } else if (budgetVal === '1cr-2.5cr') {
+                    if (p.type !== 'Sale' || p.priceNumeric < 10000000 || p.priceNumeric > 25000000) return false;
+                } else if (budgetVal === 'above-2.5cr') {
+                    if (p.type !== 'Sale' || p.priceNumeric <= 25000000) return false;
+                } else if (budgetVal === 'rent-under-50k') {
+                    if (p.type !== 'Rent' || p.priceNumeric >= 50000) return false;
+                } else if (budgetVal === 'rent-above-50k') {
+                    if (p.type !== 'Rent' || p.priceNumeric < 50000) return false;
+                }
+
+                if (currentFilters.search) {
+                    const haystack = `${p.title} ${p.location} ${p.city} ${p.locality} ${p.category} ${p.bhk} ${p.description} ${p.facilities.join(' ')}`.toLowerCase();
+                    if (!haystack.includes(currentFilters.search)) return false;
+                }
+
+                return true;
+            });
+
+            if (sortVal === 'price-asc') {
+                filtered.sort((a, b) => a.priceNumeric - b.priceNumeric);
+            } else if (sortVal === 'price-desc') {
+                filtered.sort((a, b) => b.priceNumeric - a.priceNumeric);
+            } else if (sortVal === 'area-desc') {
+                filtered.sort((a, b) => b.sqft - a.sqft);
+            } else {
+                filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            }
+
+            document.getElementById('active-count-label').innerText = `Showing ${filtered.length} of ${PROPERTIES.length} listings`;
+
+            const hasActiveFilters = currentFilters.type !== 'All' || currentFilters.city !== 'All' || currentFilters.category !== 'All' || currentFilters.budget !== 'All' || currentFilters.search !== '';
+            const resetWrapper = document.getElementById('filter-reset-wrapper');
+            const activeTags = document.getElementById('active-filter-tags');
+
+            if (hasActiveFilters) {
+                resetWrapper.classList.remove('hidden');
+                let tagsHtml = '';
+                if (currentFilters.type !== 'All') tagsHtml += `<span class="theme-secondary-bg text-theme-main px-2.5 py-1 rounded-md font-bold">Type: ${currentFilters.type}</span>`;
+                if (currentFilters.city !== 'All') tagsHtml += `<span class="theme-secondary-bg text-theme-main px-2.5 py-1 rounded-md font-bold">City: ${currentFilters.city}</span>`;
+                if (currentFilters.category !== 'All') tagsHtml += `<span class="theme-secondary-bg text-theme-main px-2.5 py-1 rounded-md font-bold">${currentFilters.category}</span>`;
+                if (currentFilters.search) tagsHtml += `<span class="theme-secondary-bg text-theme-main px-2.5 py-1 rounded-md font-bold">"${currentFilters.search}"</span>`;
+                activeTags.innerHTML = tagsHtml;
+            } else {
+                resetWrapper.classList.add('hidden');
+            }
+
+            renderGrid(filtered);
+        }
+
+        // RENDER GRID CARDS
+        function renderGrid(items) {
+            const grid = document.getElementById('properties-grid');
+            const emptyState = document.getElementById('empty-state');
+
+            if (items.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            grid.innerHTML = items.map(property => {
+                const isSaved = savedIds.includes(property.id);
+                const statusBg = property.type === 'Sale' ? 'bg-emerald-600' : 'bg-indigo-600';
+
+                return `
+                    <div class="theme-card rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border transition-all duration-300 flex flex-col group animate-fade-in">
+                        <div class="relative aspect-4/3 overflow-hidden bg-slate-900">
+                            <img src="${property.images[0]}" 
+                                 alt="${property.title}" 
+                                 onerror="this.onerror=null; this.src='${SVG_IMAGE_FALLBACK}';"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
+                            <div class="absolute top-3 left-3 flex flex-wrap items-center gap-2">
+                                <span class="${statusBg} text-white text-[10px] font-black px-3 py-1 rounded-full shadow-md uppercase tracking-wider">
+                                    FOR ${property.type}
+                                </span>
+                                <span class="bg-black/80 backdrop-blur-md text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                                    <svg class="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-5.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                                    RERA
+                                </span>
+                                ${property.featured ? `
+                                    <span class="bg-amber-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-md">
+                                        ★ Featured
+                                    </span>
+                                ` : ''}
+                            </div>
+
+                            <button onclick="toggleFavorite(event, ${property.id})" 
+                                    aria-label="Toggle Shortlist"
+                                    class="absolute top-3 right-3 w-10 h-10 rounded-full bg-black/60 backdrop-blur-md hover:bg-black text-white flex items-center justify-center shadow-md transition-transform duration-200 active:scale-90 z-10">
+                                <svg class="w-5 h-5 ${isSaved ? 'text-rose-500 fill-rose-500' : 'text-slate-300 fill-none'}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            </button>
+
+                            <div class="absolute bottom-3 left-3 right-3">
+                                <div class="bg-black/85 backdrop-blur-md text-white px-4 py-2.5 rounded-2xl flex items-center justify-between border border-white/10 shadow-lg">
+                                    <div>
+                                        <span class="text-[10px] uppercase font-extrabold text-emerald-400 tracking-wider block">${property.category} • ${property.pricePerSqft}</span>
+                                        <span class="text-xl font-black tracking-tight text-white">${property.priceFormatted}</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-lg font-bold block">${property.bhk}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-5 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="flex items-center gap-1.5 text-theme-muted text-xs font-semibold mb-1.5">
+                                    <svg class="w-4 h-4 text-theme-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                    <span class="truncate">${property.location}</span>
+                                </div>
+
+                                <h3 onclick="openDetailModal(${property.id})" class="text-base font-extrabold text-theme-main group-hover:text-theme-accent transition-colors line-clamp-1 cursor-pointer mb-3">
+                                    ${property.title}
+                                </h3>
+
+                                <div class="grid grid-cols-3 gap-2 py-2.5 border-y theme-card text-theme-muted mb-4 theme-secondary-bg rounded-xl px-3">
+                                    <div class="flex items-center gap-2">
+                                        <svg class="w-4 h-4 text-theme-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                                        <div class="text-xs">
+                                            <span class="font-bold block text-theme-main">${property.bhk}</span>
+                                            <span class="text-theme-sub text-[10px] uppercase">Beds</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 border-l theme-card pl-2">
+                                        <svg class="w-4 h-4 text-theme-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                        <div class="text-xs">
+                                            <span class="font-bold block text-theme-main">${property.baths}</span>
+                                            <span class="text-theme-sub text-[10px] uppercase">Baths</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2 border-l theme-card pl-2">
+                                        <svg class="w-4 h-4 text-theme-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                                        <div class="text-xs">
+                                            <span class="font-bold block text-theme-main">${property.sqft.toLocaleString('en-IN')}</span>
+                                            <span class="text-theme-sub text-[10px] uppercase">Sq Ft</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-1.5 mb-5">
+                                    ${property.facilities.slice(0, 3).map(f => `
+                                        <span class="text-[10px] font-bold theme-secondary-bg text-theme-accent px-2.5 py-1 rounded-md border theme-card">
+                                            ${f}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 pt-2 border-t theme-card">
+                                <button onclick="openDetailModal(${property.id})" class="w-full theme-secondary-bg hover:opacity-90 text-theme-main font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 border theme-card">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                    <span>Details</span>
+                                </button>
+                                <button onclick="openContactModal(${property.id})" class="w-full bg-theme-accent text-white font-bold text-xs py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                    <span>Contact</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // FAVORITES / SHORTLIST LOGIC
+        function toggleFavorite(event, id) {
+            event.stopPropagation();
+            const index = savedIds.indexOf(id);
+            if (index > -1) {
+                savedIds.splice(index, 1);
+                showToast("Removed from shortlist", "info");
+            } else {
+                savedIds.push(id);
+                showToast("Property saved to shortlist!", "success");
+            }
+
+            safeStorage.setItem('proppulse_favorites_inr', JSON.stringify(savedIds));
+            updateSavedBadges();
+            applyFilters();
+            renderShortlistDrawerItems();
+        }
+
+        function updateSavedBadges() {
+            document.getElementById('saved-counter-badge').innerText = savedIds.length;
+            document.getElementById('drawer-counter').innerText = savedIds.length;
+        }
+
+        function toggleShortlistDrawer(show) {
+            const drawer = document.getElementById('shortlist-drawer');
+            if (show) {
+                renderShortlistDrawerItems();
+                drawer.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                drawer.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        function renderShortlistDrawerItems() {
+            const container = document.getElementById('drawer-items-container');
+            const savedItems = PROPERTIES.filter(p => savedIds.includes(p.id));
+
+            if (savedItems.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-theme-muted">
+                        <svg class="w-12 h-12 text-theme-sub mx-auto mb-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                        <p class="text-sm font-semibold text-theme-main">Your shortlist is currently empty.</p>
+                        <p class="text-xs text-theme-sub mt-1">Tap the heart icon on any property card to save it here.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = savedItems.map(p => `
+                <div class="flex items-center gap-3 p-3 theme-secondary-bg rounded-2xl border theme-card">
+                    <img src="${p.images[0]}" onerror="this.onerror=null; this.src='${SVG_IMAGE_FALLBACK}';" class="w-16 h-16 rounded-xl object-cover">
+                    <div class="flex-grow min-w-0">
+                        <h4 onclick="toggleShortlistDrawer(false); openDetailModal(${p.id});" class="text-xs font-extrabold text-theme-main line-clamp-1 cursor-pointer hover:text-theme-accent">${p.title}</h4>
+                        <p class="text-xs font-bold text-theme-accent">${p.priceFormatted}</p>
+                        <p class="text-[10px] text-theme-sub truncate">${p.city} • ${p.bhk}</p>
+                    </div>
+                    <button onclick="toggleFavorite(event, ${p.id})" class="text-theme-sub hover:text-rose-500 p-2" title="Remove from shortlist">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function clearShortlist() {
+            savedIds = [];
+            safeStorage.setItem('proppulse_favorites_inr', JSON.stringify(savedIds));
+            updateSavedBadges();
+            applyFilters();
+            renderShortlistDrawerItems();
+            showToast("Shortlist cleared", "info");
+        }
+
+        // STANDALONE EMI CALCULATOR & CONIC DONUT CHART
+        function openEMICalculatorModal() {
+            document.getElementById('emi-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            updateStandaloneEMI();
+        }
+
+        function closeEMICalculatorModal() {
+            document.getElementById('emi-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function updateStandaloneEMI() {
+            const P = parseFloat(document.getElementById('standalone-principal').value) || 0;
+            const annualRate = parseFloat(document.getElementById('standalone-rate').value) || 0;
+            const years = parseInt(document.getElementById('standalone-tenure').value) || 20;
+
+            document.getElementById('standalone-principal-val').innerText = "₹" + P.toLocaleString('en-IN');
+
+            if (P <= 0 || annualRate <= 0) return;
+
+            const r = (annualRate / 12) / 100;
+            const n = years * 12;
+
+            const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            const totalPayable = emi * n;
+            const totalInterest = totalPayable - P;
+
+            const principalPct = Math.round((P / totalPayable) * 100);
+            const interestPct = 100 - principalPct;
+
+            document.getElementById('standalone-emi-output').innerText = "₹" + Math.round(emi).toLocaleString('en-IN');
+            document.getElementById('standalone-loan-output').innerText = "₹" + Math.round(P).toLocaleString('en-IN');
+            document.getElementById('standalone-interest-output').innerText = "₹" + Math.round(totalInterest).toLocaleString('en-IN');
+            document.getElementById('standalone-payable-output').innerText = "₹" + Math.round(totalPayable).toLocaleString('en-IN');
+
+            // Chart update
+            document.getElementById('chart-principal-pct').innerText = principalPct + "%";
+            document.getElementById('chart-principal-pct-val').innerText = principalPct + "%";
+            document.getElementById('chart-interest-pct-val').innerText = interestPct + "%";
+
+            updateDonutChart(principalPct);
+        }
+
+        function updateDonutChart(principalPct) {
+            const chart = document.getElementById('chart-donut');
+            if (!chart) return;
+
+            if (typeof principalPct === 'undefined') {
+                const P = parseFloat(document.getElementById('standalone-principal').value) || 8000000;
+                const annualRate = parseFloat(document.getElementById('standalone-rate').value) || 8.5;
+                const years = parseInt(document.getElementById('standalone-tenure').value) || 20;
+                const r = (annualRate / 12) / 100;
+                const n = years * 12;
+                const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+                const totalPayable = emi * n;
+                principalPct = Math.round((P / totalPayable) * 100);
+            }
+
+            const pColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-principal').trim() || '#10b981';
+            const iColor = getComputedStyle(document.documentElement).getPropertyValue('--chart-interest').trim() || '#f59e0b';
+
+            chart.style.background = `conic-gradient(${pColor} 0% ${principalPct}%, ${iColor} ${principalPct}% 100%)`;
+        }
+
+        // EMBEDDED EMI CALCULATOR (INSIDE PROPERTY DETAILS)
+        function updateEmbeddedEMI(propertyPrice) {
+            const principalInput = document.getElementById('embedded-principal');
+            const rateInput = document.getElementById('embedded-rate');
+            const tenureSelect = document.getElementById('embedded-tenure');
+
+            if (!principalInput || !rateInput || !tenureSelect) return;
+
+            const P = parseFloat(principalInput.value) || (propertyPrice * 0.8);
+            const annualRate = parseFloat(rateInput.value) || 8.5;
+            const years = parseInt(tenureSelect.value) || 20;
+
+            document.getElementById('embedded-principal-val').innerText = "₹" + Math.round(P).toLocaleString('en-IN');
+
+            const r = (annualRate / 12) / 100;
+            const n = years * 12;
+
+            const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            const totalPayable = emi * n;
+            const totalInterest = totalPayable - P;
+
+            document.getElementById('embedded-emi-output').innerText = "₹" + Math.round(emi).toLocaleString('en-IN');
+            document.getElementById('embedded-interest-output').innerText = "₹" + Math.round(totalInterest).toLocaleString('en-IN');
+        }
+
+        // DETAIL MODAL
+        function openDetailModal(id) {
+            const property = PROPERTIES.find(p => p.id === id);
+            if (!property) return;
+
+            const modalBody = document.getElementById('detail-modal-body');
+
+            const isSale = property.type === 'Sale';
+            const defaultLoanAmount = isSale ? Math.round(property.priceNumeric * 0.8) : 0;
+
+            modalBody.innerHTML = `
+                <div class="theme-secondary-bg p-4 sm:p-6 rounded-t-3xl border-b theme-card">
+                    <div class="relative rounded-2xl overflow-hidden aspect-16/9 bg-slate-900 mb-3 shadow-lg">
+                        <img id="modal-main-image" src="${property.images[0]}" 
+                             onerror="this.onerror=null; this.src='${SVG_IMAGE_FALLBACK}';"
+                             class="w-full h-full object-cover">
+                    </div>
+                    ${property.images.length > 1 ? `
+                        <div class="flex gap-2 overflow-x-auto pb-1 custom-scrollbar">
+                            ${property.images.map((img, idx) => `
+                                <img src="${img}" onerror="this.onerror=null; this.src='${SVG_IMAGE_FALLBACK}';" 
+                                     onclick="document.getElementById('modal-main-image').src='${img}'"
+                                     class="w-20 h-14 rounded-xl object-cover cursor-pointer hover:opacity-80 border-2 border-emerald-500 transition-all">
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+
+                <div class="p-6 sm:p-8 space-y-8">
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b theme-card pb-6">
+                        <div>
+                            <div class="flex flex-wrap items-center gap-2 mb-2">
+                                <span class="bg-emerald-500/20 text-emerald-400 font-extrabold text-xs px-3 py-1 rounded-full border border-emerald-500/30">FOR ${property.type}</span>
+                                <span class="theme-secondary-bg text-theme-main font-bold text-xs px-3 py-1 rounded-full border theme-card">${property.category}</span>
+                                <span class="bg-amber-500/20 text-amber-500 font-bold text-xs px-2.5 py-1 rounded-full border border-amber-500/30">RERA: ${property.reraId}</span>
+                            </div>
+                            <h2 class="text-2xl sm:text-3xl font-black text-theme-main">${property.title}</h2>
+                            <p class="text-theme-muted text-sm font-medium mt-1 flex items-center gap-1.5">
+                                <svg class="w-4 h-4 text-theme-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <span>${property.location}</span>
+                            </p>
+                        </div>
+                        <div class="text-left sm:text-right">
+                            <div class="text-xs text-theme-sub font-bold uppercase">Price</div>
+                            <div class="text-2xl sm:text-3xl font-black text-theme-accent">${property.priceFormatted}</div>
+                            <div class="text-xs font-bold text-theme-muted">${property.pricePerSqft}</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="theme-secondary-bg p-4 rounded-2xl border theme-card text-center">
+                            <svg class="w-6 h-6 text-theme-accent mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                            <div class="text-lg font-black text-theme-main">${property.bhk}</div>
+                            <div class="text-xs text-theme-sub uppercase font-bold">BHK</div>
+                        </div>
+                        <div class="theme-secondary-bg p-4 rounded-2xl border theme-card text-center">
+                            <svg class="w-6 h-6 text-theme-accent mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                            <div class="text-lg font-black text-theme-main">${property.facing}</div>
+                            <div class="text-xs text-theme-sub uppercase font-bold">Facing</div>
+                        </div>
+                        <div class="theme-secondary-bg p-4 rounded-2xl border theme-card text-center">
+                            <svg class="w-6 h-6 text-theme-accent mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                            <div class="text-lg font-black text-theme-main">${property.sqft.toLocaleString('en-IN')}</div>
+                            <div class="text-xs text-theme-sub uppercase font-bold">Sq Ft</div>
+                        </div>
+                        <div class="theme-secondary-bg p-4 rounded-2xl border theme-card text-center">
+                            <svg class="w-6 h-6 text-theme-accent mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+                            <div class="text-lg font-black text-theme-main">${property.possession}</div>
+                            <div class="text-xs text-theme-sub uppercase font-bold">Status</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-theme-main mb-2">Description</h3>
+                        <p class="text-theme-muted text-sm leading-relaxed">${property.description}</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-bold text-theme-main mb-3">Amenities & Highlights</h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            ${property.facilities.map(fac => `
+                                <div class="flex items-center gap-2 theme-secondary-bg border theme-card p-3 rounded-xl text-theme-main text-xs font-bold">
+                                    <svg class="w-4 h-4 text-theme-accent shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                    <span>${fac}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    ${isSale ? `
+                        <!-- Embedded EMI Calculator -->
+                        <div class="theme-secondary-bg p-5 rounded-2xl border theme-card space-y-4">
+                            <div class="flex items-center justify-between border-b theme-card pb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-xl bg-theme-accent text-white flex items-center justify-center font-black">₹</div>
+                                    <h4 class="text-base font-extrabold text-theme-main">Estimated Home Loan EMI</h4>
+                                </div>
+                                <span class="text-xs text-theme-sub">80% Default LTV</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold text-theme-muted mb-1">
+                                        <span>Loan Amount</span>
+                                        <span id="embedded-principal-val" class="text-theme-accent">₹${defaultLoanAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                    <input type="range" id="embedded-principal" min="500000" max="${property.priceNumeric}" step="100000" value="${defaultLoanAmount}" oninput="updateEmbeddedEMI(${property.priceNumeric})" class="w-full accent-emerald-500 cursor-pointer">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-theme-muted mb-1">Interest Rate (% p.a.)</label>
+                                    <input type="number" step="0.1" id="embedded-rate" value="8.5" oninput="updateEmbeddedEMI(${property.priceNumeric})" class="w-full theme-input rounded-xl px-3 py-1.5 text-xs font-bold focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-theme-muted mb-1">Tenure (Years)</label>
+                                    <select id="embedded-tenure" onchange="updateEmbeddedEMI(${property.priceNumeric})" class="w-full theme-input rounded-xl px-3 py-1.5 text-xs font-bold focus:outline-none">
+                                        <option value="15">15 Years</option>
+                                        <option value="20" selected>20 Years</option>
+                                        <option value="25">25 Years</option>
+                                        <option value="30">30 Years</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs border-t theme-card">
+                                <div>
+                                    <span class="text-theme-sub">Est. Monthly Repayment: </span>
+                                    <strong id="embedded-emi-output" class="text-lg font-black text-theme-accent">₹0</strong>
+                                </div>
+                                <div>
+                                    <span class="text-theme-sub">Total Interest Payable: </span>
+                                    <strong id="embedded-interest-output" class="font-bold text-theme-main">₹0</strong>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- Agent Card -->
+                    <div class="theme-secondary-bg p-5 rounded-2xl border theme-card flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div class="flex items-center gap-4">
+                            <img src="${property.agent.avatar}" onerror="this.onerror=null; this.src='${SVG_IMAGE_FALLBACK}';" class="w-14 h-14 rounded-full object-cover border-2 border-emerald-500">
+                            <div>
+                                <h4 class="text-base font-extrabold text-theme-main">${property.agent.name}</h4>
+                                <p class="text-xs text-theme-accent font-bold">${property.agent.role}</p>
+                                <p class="text-xs text-theme-sub mt-0.5">${property.agent.email}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <button onclick="closeDetailModal(); openContactModal(${property.id});" class="flex-1 sm:flex-none bg-theme-accent text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow-md transition-all">
+                                Schedule Visit
+                            </button>
+                            <button onclick="openWhatsAppAgent('${property.agent.whatsapp}', '${property.title}')" class="flex-1 sm:flex-none bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                                WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('detail-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+
+            if (isSale) {
+                updateEmbeddedEMI(property.priceNumeric);
+            }
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // CONTACT & SITE VISIT MODAL LOGIC
+        function openContactModal(id) {
+            const property = PROPERTIES.find(p => p.id === id);
+            if (!property) return;
+
+            document.getElementById('quick-contact-property-id').value = id;
+            document.getElementById('contact-modal-subtitle').innerText = `Re: ${property.title}`;
+            document.getElementById('quick-contact-message').value = `Namaste! I would like to schedule a site visit for ${property.title} in ${property.city}.`;
+            document.getElementById('contact-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function openGeneralContactModal() {
+            document.getElementById('quick-contact-property-id').value = '0';
+            document.getElementById('contact-modal-subtitle').innerText = 'PropPulse Property Advisory Hub';
+            document.getElementById('quick-contact-message').value = 'Namaste PropPulse team, I am looking for property discovery assistance in India.';
+            document.getElementById('contact-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contact-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function openWhatsAppAgent(number, title) {
+            const msg = encodeURIComponent(`Namaste! I am interested in viewing "${title}" discovered on PropPulse.`);
+            window.open(`https://wa.me/${number}?text=${msg}`, '_blank');
+        }
+
+        function openWhatsAppDirect() {
+            const msg = encodeURIComponent(`Namaste PropPulse! I would like to inquire about real estate options.`);
+            window.open(`https://wa.me/919848012345?text=${msg}`, '_blank');
+        }
+
+        function handleQuickContactSubmit(e) {
+            e.preventDefault();
+            closeContactModal();
+            showToast("Visit scheduled! A PropPulse advisor will contact you shortly.", "success");
+        }
+
+        function subscribeNewsletter() {
+            const input = document.getElementById('newsletter-mobile');
+            if (input && input.value.trim()) {
+                input.value = '';
+                showToast("Subscribed to PropPulse WhatsApp Alerts!", "success");
+            } else {
+                showToast("Please enter a valid mobile number", "info");
+            }
+        }
+
+        // TOAST SYSTEM
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+
+            const isSuccess = type === 'success';
+            const iconSvg = isSuccess 
+                ? `<svg class="w-5 h-5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`
+                : `<svg class="w-5 h-5 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+
+            toast.className = `flex items-center gap-3 px-4 py-3 rounded-2xl border shadow-xl text-xs font-bold theme-card text-theme-main pointer-events-auto transition-all duration-300 transform translate-y-2 opacity-0`;
+            toast.innerHTML = `
+                ${iconSvg}
+                <span>${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // KEYBOARD & OVERLAY EVENT DELEGATION FOR MODALS / DRAWERS
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDetailModal();
+                closeContactModal();
+                closeEMICalculatorModal();
+                toggleShortlistDrawer(false);
+            }
+        });
+
+        // BACKDROP CLICK CLOSING
+        [
+            { id: 'detail-modal', closeFn: closeDetailModal },
+            { id: 'contact-modal', closeFn: closeContactModal },
+            { id: 'emi-modal', closeFn: closeEMICalculatorModal },
+            { id: 'shortlist-drawer', closeFn: () => toggleShortlistDrawer(false) }
+        ].forEach(({ id, closeFn }) => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('click', (e) => {
+                    if (e.target === el) {
+                        closeFn();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
